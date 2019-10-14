@@ -6,8 +6,9 @@ const gardenPlotSchema = new mongoose.Schema({
     required: true
   },
   plant: {
-    type: String,
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Plant',
+    required: false
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

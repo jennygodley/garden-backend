@@ -7,7 +7,7 @@ const exampleSchema = new mongoose.Schema({
   },
   text: {
     type: String,
-    required: true
+    required: false
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

@@ -7,50 +7,56 @@ const plantSchema = new mongoose.Schema({
   },
   hardinessZone: {
     type: String,
-    required: true
+    required: false
   },
   inBloomStart: {
     type: String,
-    required: true
+    required: false
   },
   inBloomEnd: {
     type: String,
-    required: true
+    required: false
   },
   whenToPlant: {
     type: String,
-    required: true
+    required: false
   },
   sunNeeds: {
     type: String,
-    required: true
+    required: false
   },
   perennial: {
     type: Boolean,
-    required: true
+    required: false
   },
   directSow: {
     type: String,
-    required: true
+    required: false
   },
   startIndoors: {
     type: Boolean,
-    required: true
+    required: false
   },
   notes1: {
     type: String,
-    required: true
+    required: false
   },
   notes2: {
     type: String,
-    required: true
+    required: false
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+  garden: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'GardenPlot',
+    required: false
   }
-}, {
+},
+{
   timestamps: true
 })
 
