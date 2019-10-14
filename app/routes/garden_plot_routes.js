@@ -30,7 +30,8 @@ const router = express.Router()
 // INDEX
 // GET /gardenPlots
 router.get('/gardenPlots', requireToken, (req, res, next) => {
-  gardenPlot.find()
+  gardenPlot.find({ owner: req.user._id })
+    .populate('owner')
     .then(gardenPlots => {
       // `gardenPlots` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
@@ -46,8 +47,11 @@ router.get('/gardenPlots', requireToken, (req, res, next) => {
 // SHOW
 // GET /gardenPlots/5a7db6c74d55bc51bdf39793
 router.get('/gardenPlots/:id', requireToken, (req, res, next) => {
+  const id = req.params.id
+  gardenPlot.findById(id)
+    .populate('owner')
   // req.params.id will be set based on the `:id` in the route
-  gardenPlot.findById(req.params.id)
+  // gardenPlot.findById(req.params.id)
     .then(handle404)
     // if `findById` is succesful, respond with 200 and "gardenPlot" JSON
     .then(gardenPlot => res.status(200).json({ gardenPlot: gardenPlot.toObject() }))
