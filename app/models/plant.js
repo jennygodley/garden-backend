@@ -48,7 +48,7 @@ const plantSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   },
   garden: {
     type: mongoose.Schema.Types.ObjectId,
