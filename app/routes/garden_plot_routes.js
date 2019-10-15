@@ -32,6 +32,7 @@ const router = express.Router()
 router.get('/gardenPlots', requireToken, (req, res, next) => {
   gardenPlot.find({ owner: req.user._id })
     .populate('owner')
+    .populate('plant')
     .then(gardenPlots => {
       // `gardenPlots` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
@@ -50,6 +51,7 @@ router.get('/gardenPlots/:id', requireToken, (req, res, next) => {
   const id = req.params.id
   gardenPlot.findById(id)
     .populate('owner')
+    .populate('plant')
   // req.params.id will be set based on the `:id` in the route
   // gardenPlot.findById(req.params.id)
     .then(handle404)
@@ -86,6 +88,30 @@ router.patch('/gardenPlots/:id', requireToken, removeBlanks, (req, res, next) =>
   gardenPlot.findById(req.params.id)
     .then(handle404)
     .then(gardenPlot => {
+      // pass the `req` object and the Mongoose record to `requireOwnership`
+      // it will throw an error if the current user isn't the owner
+      requireOwnership(req, gardenPlot)
+
+      // pass the result of Mongoose's `.update` to the next `.then`
+      return gardenPlot.updateOne(req.body.gardenPlot)
+    })
+    // if that succeeded, return 204 and no JSON
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
+
+// UPDATE
+// PATCH /gardenPlots/5a7db6c74d55bc51bdf39793/plant
+router.patch('/gardenPlots/:id/plant', requireToken, removeBlanks, (req, res, next) => {
+  // if the client attempts to change the `owner` property by including a new
+  // owner, prevent that by deleting that key/value pair
+  delete req.body.gardenPlot.owner
+
+  gardenPlot.findById(req.params.id)
+    .then(handle404)
+    .then(gardenPlot => {
+      console.log(req.body.plant)
       // pass the `req` object and the Mongoose record to `requireOwnership`
       // it will throw an error if the current user isn't the owner
       requireOwnership(req, gardenPlot)

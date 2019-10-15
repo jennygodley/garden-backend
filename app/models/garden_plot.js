@@ -5,11 +5,11 @@ const gardenPlotSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  plant: {
+  plant: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Plant',
     required: false
-  },
+  }],
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
