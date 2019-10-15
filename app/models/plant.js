@@ -26,7 +26,7 @@ const plantSchema = new mongoose.Schema({
     required: false
   },
   perennial: {
-    type: Boolean,
+    type: String,
     required: false
   },
   directSow: {
@@ -34,7 +34,7 @@ const plantSchema = new mongoose.Schema({
     required: false
   },
   startIndoors: {
-    type: Boolean,
+    type: String,
     required: false
   },
   notes1: {
