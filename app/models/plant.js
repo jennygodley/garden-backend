@@ -10,51 +10,51 @@ const plantSchema = new mongoose.Schema({
     required: false
   },
   jan: {
-    type: Boolean,
+    type: String,
     required: false
   },
   feb: {
-    type: Boolean,
+    type: String,
     required: false
   },
   march: {
-    type: Boolean,
+    type: String,
     required: false
   },
   april: {
-    type: Boolean,
+    type: String,
     required: false
   },
   may: {
-    type: Boolean,
+    type: String,
     required: false
   },
   june: {
-    type: Boolean,
+    type: String,
     required: false
   },
   july: {
-    type: Boolean,
+    type: String,
     required: false
   },
   aug: {
-    type: Boolean,
+    type: String,
     required: false
   },
   sept: {
-    type: Boolean,
+    type: String,
     required: false
   },
   oct: {
-    type: Boolean,
+    type: String,
     required: false
   },
   nov: {
-    type: Boolean,
+    type: String,
     required: false
   },
   dec: {
-    type: Boolean,
+    type: String,
     required: false
   },
   whenToPlant: {
@@ -74,7 +74,7 @@ const plantSchema = new mongoose.Schema({
     required: false
   },
   checked: {
-    type: Boolean,
+    type: String,
     required: false
   },
   notes1: {
